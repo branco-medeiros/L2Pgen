@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L2P Gen</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .fixed-font { font-family: monospace;}
+  </style>
+  <script src="js/lib/jquery-3.3.1.js"></script>
+  <script src="js/lib/bootstrap.min.js"></script>
+  <script src="js/lib/knockout-3.4.2.js"></script>
+  <script src="js/lib/require.js"></script>
+  <script>
+    $(function () {
+      require.config({
+        baseUrl: "js/",
+        urlArgs: "salt=" + new Date().valueOf()
+      });
+
+      var source = $("#template-source").text()
+      var spec = $("#template-spec").text()
+
+      require(["main"], function (app) {
+        window.VM = app
+
+        var vm = new app();
+        vm.source(source)
+        vm.spec(spec)
+
+        window.xVM = vm
+        ko.applyBindings(vm)
+        if (vm.init) vm.init();
+      })
+    })
+
+  </script>
+</head>
+<body>
+  <h1 data-bind="text:hello">Hello, world!</h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <form class="form-inline">
+          <div class="form-group">
+            <label>Spec</label>
+            <input type="text" class="form-control" data-bind="value:spec">
+          </div>
+          <button class="btn btn-default" data-bind="click:generate">Generate</button>
+        </form>
+
+        <div class="form-group">
+          <label>Source:</label>
+          <textarea class="form-control fixed-font" rows="10" data-bind="value:source"></textarea>
+        </div>
+
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Result:</label>
+          <textarea class="form-control fixed-font" rows="12" data-bind="value:result"></textarea>
+        </div>
+      </div>
+
+    </div> <!-- row -->
+
+    <div data-bind="visible:status.valid">
+      <ul data-bind="foreach:status">
+        <li data-bind="text:$data" ></li>
+      </ul>
+    </div>
+  </div>
+<script type="text" id="template-source-blood-dk">AntiMagicBarrier = 205727
+vampiric-blood = critically-low-health
+death-strike.heal = low-health
+icebound-fortitude = low-health and is-being-damaged
+dancing-rune-weapon = is-boss-fight or enemies > 1 or low-health
+marrowrend = bone-shield-expiring
+death-strike = blood-shield-expiring or next-rune-spender-will-overcap-runic-power
+blooddrinker = dancing-rune-weapon-is-not-up
+blood-boil = target-does-not-have-blood-plague or blood-boil-charges > 1
+marrowrend.no-drw = bone-shield-stacks < 7 and dancing-rune-weapon-is-not-up
+marrowrend.drw = bone-shield-stacks < 5 and dancing-rune-weapon-is-up
+rune-strike = rune-strike-charges == 2 and rune-count < 4
+death-and-decay = enemies > 2 and rune-count > 2
+heart-strike = rune-count > 2 or death-strike-not-usable
+blood-boil.drw = dancing-rune-weapon-is-up
+death-and-decay.cs = has-buff-crimson-scourge
+blood-boil.filler = on-cooldown
+rune-strike.filler = on-cooldown
+AntiMagicShell = 48707
+BloodBoil = 50842
+BloodPlague = 55078
+BloodShield = 77535
+Blooddrinker = 206931
+BoneShield = 195181
+BonesOfTheDamned = 279503
+CrimsonScourge = 81136
+DancingRuneWeapon = 49028
+DarkCommand = 56222
+DeathGrip = 49576
+DeathStrike = 49998
+DeathAndDecay = 43265
+DeathsAdvance = 48265
+Haemostasis = 235559
+HeartStrike = 206930
+Hemostasis = 273946
+IceboundFortitude = 48792
+Marrowrend = 195182
+Ossuary = 219786
+RedThirst = 205723
+RuneStrike = 210764
+RuneTap = 194679
+VampiricBlood = 55233
+</script>
+
+<script type="text" id="template-spec-blood-dk">
+blood
+</script>
+
+
+</body>
+</html>

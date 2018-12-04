@@ -1,0 +1,13 @@
+    marrowrend = bone-shield-expiring
+    death-strike = health-percent-is-low or blood-shield-expiring or next-rune-spender-will-overcap-runic-power
+    blooddrinker = dancing-rune-weapon-is-not-up
+    blood-boil = target-does-not-have-blood-plague or blood-boil-has-two-charges
+    marrowrend-2 = bone-shield-stacks-less-than-7 and dancing-rune-weapon-is-not-up
+	marrowrend-3 = bone-shield-stacks-less-than-5 and dancing-rune-weapon-is-up
+    rune-strike = rune-strike-charges-is-2 and rune-count-less-than-4
+	death-and-decay = targets-more-than-2 and rune-count-more-than-2
+	heart-strike = rune-count-more-than-2 or death-strike-not-usable
+    blood-boil-2 = dancing-rune-weapon-is-up
+    death-and-decay-2 = has-buff-crimson-scourge
+    blood-boil-3 = on-cooldown
+    rune-strike-2 = on-cooldown
