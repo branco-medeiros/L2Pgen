@@ -33,10 +33,10 @@ define([], function(){
         translate: {},
         attributes:{},
         spells: [],
-        interrupt: ""
+        interrupt: "",
+        dict: {}
       }
 
-      var dict = {}
       spells.forEach(function(v){
         var spName = Generator.getSpellName(v.name);
         v.spName = spName
@@ -76,7 +76,7 @@ define([], function(){
       var spName = spell.spName
 
       var id = 0;
-      if(v.expr.length === 1 && v.expr[0].isNum) id = ~~v.expr[0].text
+      if(spell.expr.length === 1 && spell.expr[0].isNum) id = ~~spell.expr[0].text
       var s = info.dict[spName];
       if(!s){
         s = {name:spName, id: id}
